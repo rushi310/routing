@@ -13,10 +13,9 @@ import { HomeComponent } from './shared/component/home/home.component';
 import { ProductsComponent } from './shared/component/products/products.component';
 import { SingleProductComponent } from './shared/component/products/single-product/single-product.component';
 import { UsersComponent } from './shared/component/users/users.component';
-import { FormComponent } from './shared/component/users/form/form.component';
 import { SingleUserComponent } from './shared/component/users/single-user/single-user.component';
 import { NavBarComponent } from './shared/component/nav-bar/nav-bar.component';
-
+import { FormUserComponent } from "./shared/component/users/form-user/form-user.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,10 +28,9 @@ import { NavBarComponent } from './shared/component/nav-bar/nav-bar.component';
     ProductsComponent,
     SingleProductComponent,
     UsersComponent,
-    FormComponent,
     SingleUserComponent,
     NavBarComponent,
-    
+    FormUserComponent
   ],
   imports: [
     BrowserModule,
