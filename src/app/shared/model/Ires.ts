@@ -1,2 +1,4 @@
-export interface IRes {
+export interface Ires<T>{
+    msg  : string,
+    data : T
 }

@@ -1,1 +1,25 @@
-<p>product-form works!</p>
+<div col-md-8>
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="productsForm" (ngSubmit)="onAddProduct()">
+                <div class="form-group">
+                    <label for="pName">Product Name</label>
+                    <input type="text" id="pName" formControlName="pName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pStatus">Product Status</label>
+                    <input type="text" id="pStatus" formControlName="pStatus" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="canReturn">Product Can Return</label>
+                    <select type="text" id="canReturn" formControlName="canReturn" class="form-control">
+                        <option [ngValue]="1">Yes</option>
+                        <option [ngValue]="0">No</option>
+                    </select>
+                </div>
+                <button *ngIf="!isInEditMode" class="w-100" mat-raised-button color="primary" type="submit">Add Product</button>
+                <button *ngIf="isInEditMode" class="w-100" mat-raised-button color="warn" type="button" (click)="onUpdateProduct()">Update Product</button>
+            </form>
+        </div>
+    </div>
+</div>

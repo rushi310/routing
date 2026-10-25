@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from "../model/Iproduct";
 import { Observable, of} from 'rxjs';
+import { Ires } from '../model/Ires';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,18 @@ export class ProductService {
   constructor() { }
   fetchAll():Observable<IProduct[]>{
     return of(this.productsArr)
+  }
+
+  fetchProductById(Id:string): Observable<IProduct>{
+    let Product_OBJ = this.productsArr.find((p) => p.pId === Id)!;
+    return of(Product_OBJ)
+  }
+  onRemoveProduct(Id:string):Observable<Ires<IProduct>>{
+    let GETINDEX = this.productsArr.findIndex(p => p.pId === Id);
+    let arr = this.productsArr.splice(GETINDEX,1);
+    return of({
+      msg:`The product with id $[Id] is removed successfully.....!`,
+      data: arr[0]
+    })
   }
 }
