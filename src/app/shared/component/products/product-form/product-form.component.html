@@ -5,10 +5,16 @@
                 <div class="form-group">
                     <label for="pName">Product Name</label>
                     <input type="text" id="pName" formControlName="pName" class="form-control">
+                    <strong *ngIf="getControls['pName'].touched && getControls['pName'].hasError('required')"
+                        class="text-danger">Enter product name...!</strong>
                 </div>
                 <div class="form-group">
                     <label for="pStatus">Product Status</label>
-                    <input type="text" id="pStatus" formControlName="pStatus" class="form-control">
+                    <select type="text" id="pStatus" formControlName="pStatus" class="form-control">
+                    <option value="Pending">Pending</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="canReturn">Product Can Return</label>
@@ -17,8 +23,10 @@
                         <option [ngValue]="0">No</option>
                     </select>
                 </div>
-                <button *ngIf="!isInEditMode" class="w-100" mat-raised-button color="primary" type="submit">Add Product</button>
-                <button *ngIf="isInEditMode" class="w-100" mat-raised-button color="warn" type="button" (click)="onUpdateProduct()">Update Product</button>
+                <button *ngIf="!isInEditMode" class="w-100" mat-raised-button color="primary" type="submit">Add
+                    Product</button>
+                <button *ngIf="isInEditMode" [disabled]="disableSubmitBtn" class="w-100" mat-raised-button color="accent" type="button"
+                    (click)="onUpdateProduct()">Update Product</button>
             </form>
         </div>
     </div>

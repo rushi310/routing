@@ -43,7 +43,7 @@ export class SingleProductComponent implements OnInit {
     let config = new MatDialogConfig();
     config.width = '400px';
     config.disableClose = true;
-    config.data = `Are you sure you want to remove the product with it ${this.productId}`;
+    config.data = `Are you sure you want to remove the product `;
     let _matDialogRef = this._matDialog.open(GetConfirmComponent, config);
     _matDialogRef.afterClosed().subscribe((getConfirm)=>{
       if(getConfirm){
@@ -56,5 +56,7 @@ export class SingleProductComponent implements OnInit {
       }
     })
   }
-  
+redirectToEdit(): void {
+  this._router.navigate(['/products', this.productId, 'edit']);
+}
 }

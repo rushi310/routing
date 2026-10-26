@@ -25,12 +25,12 @@ const routes: Routes = [
         component:ProductFormComponent,
     },
     {
-        path:"products/:id",
-        component: SingleProductComponent,
+        path:"products/:id/edit",
+        component: ProductFormComponent,
     },
     {
-        path:":id/edit",
-        component: ProductFormComponent,
+        path:"products/:id",
+        component: SingleProductComponent,
     },
     {
         path:"fairs",
