@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row" *ngIf="productObj">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">Product Name:{{productObj.pName}}</div>
@@ -8,7 +8,7 @@
                 <p>Can Return : {{productObj.canReturn ? "Yes" : "No"}}</p>
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <button (click)="redirectToEdit()" mat-raised-button color="primary">Edit</button>
+                <button routerLink="edit" queryParamsHandling="preserve" mat-raised-button color="primary">Edit</button>
                 <button (click)="onRemove()" mat-raised-button color="warn">Remove</button>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { IProduct } from 'src/app/shared/model/Iproduct';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { GetConfirmComponent } from '../../get-confirm/get-confirm.component';
 import { SnackBarService } from 'src/app/shared/service/snack-bar.service';
+import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-single-product',
@@ -12,51 +13,52 @@ import { SnackBarService } from 'src/app/shared/service/snack-bar.service';
   styleUrls: ['./single-product.component.scss']
 })
 export class SingleProductComponent implements OnInit {
-  productObj!:IProduct;
-  productId!:string;
+  productObj!: IProduct;
+  productId!: string;
   constructor(private _productService: ProductService,
     private _routes: ActivatedRoute,
     private _matDialog: MatDialog,
-    private _router:Router,
-    private _snackBar:SnackBarService
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  getProducts(){
-    this._routes.params.subscribe(params =>{
-      this.productId = params['id']!;
-      this._productService.fetchProductById(this.productId).subscribe({
-        next: (data:IProduct) =>{
-          this.productObj = data
-        },
-        error:(err)=>{
-          console.error('Error fetching product', err)
-        }
-      })
-    })
+  getProducts() {
+    this.productId = this._routes.snapshot.params['id']
+    if (this.productId) {
+      this._productService.fetchProductById(this.productId)
+        .subscribe({
+          next: res => {
+            this.productObj = res
+          },
+          error: err => {
+            console.log(err)
+          }
+        })
+    }
   }
 
-  onRemove(){
+  onRemove() {
     let config = new MatDialogConfig();
     config.width = '400px';
     config.disableClose = true;
-    config.data = `Are you sure you want to remove the product `;
+    config.data = `Are you sure you want to remove the product with id ${this.productId}`;
     let _matDialogRef = this._matDialog.open(GetConfirmComponent, config);
-    _matDialogRef.afterClosed().subscribe((getConfirm)=>{
-      if(getConfirm){
-        this._productService.onRemoveProduct(this.productId).subscribe({
-          next:(res)=>{
-            this._snackBar.openSnackBar(res.msg);
-            this._router.navigate(['products']);
-          }
-        })
+    _matDialogRef.afterClosed().pipe(
+      tap(res=>console.log(`Before filter`,res)),
+      filter(res=>res),
+      tap(res=>console.log(`After filter`,res)),
+      switchMap(()=>this._productService.onRemoveProduct(this.productId))
+    )
+    .subscribe({
+      next:res=>{
+        this._router.navigate(['/products']);
+      },
+      error:err=>{
+        console.log(err)
       }
     })
   }
-redirectToEdit(): void {
-  this._router.navigate(['/products', this.productId, 'edit']);
-}
 }

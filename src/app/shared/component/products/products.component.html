@@ -8,14 +8,13 @@
     <div class="col-md-4 mt-5">
         <ul class="list-group" *ngIf="getAllProducts.length>0; else noData">
             <li [routerLink]="[product.pId]" routerLinkActive="active" [queryParams]="{cr : product.canReturn}"
-            class="list-group-item d-flex justify-content-between" *ngFor="let product of getAllProducts">
+                class="list-group-item d-flex justify-content-between" *ngFor="let product of getAllProducts">
                 <strong>{{product.pName}}</strong>
                 <small class="badge" [ngClass]="{
                     'badge-success' : product.pStatus === 'Delivered',
                     'badge-warning' : product.pStatus === 'Shipped',
                     'badge-danger' : product.pStatus === 'Pending'
-                }"
-                >{{product.pStatus}}</small>
+                }">{{product.pStatus}}</small>
             </li>
         </ul>
     </div>
