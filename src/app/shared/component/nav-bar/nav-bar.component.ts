@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
+  isMenuOpen = false;
 
-  constructor() { }
+  links = [
+    { path: '/home', label: 'Home', icon: 'home' },
+    { path: '/users', label: 'Users', icon: 'people' },
+    { path: '/products', label: 'Products', icon: 'inventory_2' },
+    { path: '/fairs', label: 'Fairs', icon: 'event' },
+  ];
 
-  ngOnInit(): void {
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 }

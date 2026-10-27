@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'src/app/shared/model/Iproduct';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { GetConfirmComponent } from '../../get-confirm/get-confirm.component';
-import { SnackBarService } from 'src/app/shared/service/snack-bar.service';
 import { filter, switchMap, tap } from 'rxjs';
 
 @Component({

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRouterModule } from "./app-routing.module";
 import { MaterialModule } from "./shared/module/material.module";
 import { HttpClientModule } from "@angular/common/http";
+import { AuthInterceptor } from "./shared/service/auth.interceptor";
 
 
 import { AppComponent } from './app.component';

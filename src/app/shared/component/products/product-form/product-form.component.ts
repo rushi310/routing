@@ -39,7 +39,6 @@ export class ProductFormComponent implements OnInit {
       }
     });
     this._routes.queryParams.subscribe((res)=>{
-      console.log(res);
       if(Number(res['cr'])===0){
         this.productsForm.disable();
         this.disableSubmitBtn = true
@@ -73,17 +72,24 @@ export class ProductFormComponent implements OnInit {
         pId: Date.now().toString(),
       };
       this._productService.createProduct(NEW_OBJ).subscribe({
-        next: (res) => {
-          console.log(res)
+        next: () => {
+          this._snackBar.openSnackBar('Product added successfully');
           this.productsForm.reset();
           this._router.navigate(['products']);
         },
         error: (err) => {
-          console.log(err)
+          this._snackBar.openSnackBar(err.message || 'Could not add product');
         }
       })
     }
 
+  }
+  onCancel() {
+    if (this.isInEditMode) {
+      this._router.navigate(['products', this.productId], { queryParamsHandling: 'preserve' });
+    } else {
+      this._router.navigate(['products']);
+    }
   }
   onUpdateProduct() {
     if (this.productsForm.invalid) {
@@ -102,7 +108,7 @@ export class ProductFormComponent implements OnInit {
           this._router.navigate(['products']);
         },
         error: (err) => {
-          this._snackBar.openSnackBar(err);
+          this._snackBar.openSnackBar(err.message || 'Could not update product');
         },
       });
     }

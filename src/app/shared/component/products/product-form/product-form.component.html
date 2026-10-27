@@ -1,33 +1,54 @@
-<div col-md-8>
-    <div class="card">
-        <div class="card-body">
-            <form [formGroup]="productsForm" (ngSubmit)="onAddProduct()">
-                <div class="form-group">
-                    <label for="pName">Product Name</label>
-                    <input type="text" id="pName" formControlName="pName" class="form-control">
-                    <strong *ngIf="getControls['pName'].touched && getControls['pName'].hasError('required')"
-                        class="text-danger">Enter product name...!</strong>
-                </div>
-                <div class="form-group">
-                    <label for="pStatus">Product Status</label>
-                    <select type="text" id="pStatus" formControlName="pStatus" class="form-control">
-                    <option value="Pending">Pending</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="canReturn">Product Can Return</label>
-                    <select type="text" id="canReturn" formControlName="canReturn" class="form-control">
-                        <option [ngValue]="1">Yes</option>
-                        <option [ngValue]="0">No</option>
-                    </select>
-                </div>
-                <button *ngIf="!isInEditMode" class="w-100" mat-raised-button color="primary" type="submit">Add
-                    Product</button>
-                <button *ngIf="isInEditMode" [disabled]="disableSubmitBtn" class="w-100" mat-raised-button color="accent" type="button"
-                    (click)="onUpdateProduct()">Update Product</button>
-            </form>
+<div class="form-wrapper">
+    <div class="app-card form-card">
+        <div class="form-header">
+            <mat-icon class="header-icon">{{ isInEditMode ? 'edit' : 'add_box' }}</mat-icon>
+            <div>
+                <h4 class="mb-0">{{ isInEditMode ? 'Edit Product' : 'Add Product' }}</h4>
+                <small class="text-muted">
+                    {{ isInEditMode ? 'Update the product details below' : 'Fill in the details to create a new product' }}
+                </small>
+            </div>
         </div>
+
+        <div *ngIf="disableSubmitBtn" class="locked-note">
+            <mat-icon>lock</mat-icon>
+            <span>This product cannot be returned, so it can't be edited.</span>
+        </div>
+
+        <form [formGroup]="productsForm" (ngSubmit)="isInEditMode ? onUpdateProduct() : onAddProduct()">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Product Name</mat-label>
+                <input matInput formControlName="pName" placeholder="e.g. Laptop">
+                <mat-icon matSuffix>inventory_2</mat-icon>
+                <mat-error *ngIf="getControls['pName'].hasError('required')">Product name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Product Status</mat-label>
+                <mat-select formControlName="pStatus">
+                    <mat-option value="Pending">Pending</mat-option>
+                    <mat-option value="Shipped">Shipped</mat-option>
+                    <mat-option value="Delivered">Delivered</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Can Be Returned?</mat-label>
+                <mat-select formControlName="canReturn">
+                    <mat-option [value]="1">Yes</mat-option>
+                    <mat-option [value]="0">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="form-actions">
+                <button mat-stroked-button type="button" (click)="onCancel()">Cancel</button>
+                <button *ngIf="!isInEditMode" mat-raised-button color="primary" type="submit">
+                    <mat-icon>add</mat-icon> Add Product
+                </button>
+                <button *ngIf="isInEditMode" [disabled]="disableSubmitBtn" mat-raised-button color="accent" type="submit">
+                    <mat-icon>save</mat-icon> Update Product
+                </button>
+            </div>
+        </form>
     </div>
 </div>

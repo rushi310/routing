@@ -3,21 +3,24 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from "@angular/material/icon";
 
+const MATERIAL_MODULES = [
+  MatButtonModule,
+  MatSnackBarModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatIconModule
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ],
-  exports:[
-    MatButtonModule,
-    MatSnackBarModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ]
+  imports: [CommonModule, ...MATERIAL_MODULES],
+  exports: [...MATERIAL_MODULES]
 })
 export class MaterialModule { }

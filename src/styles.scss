@@ -1,4 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global theme - one set of colours used across the whole app */
+:root {
+  --primary: #3f51b5;
+  --primary-dark: #303f9f;
+  --primary-soft: #e8eaf6;
+  --accent: #ff4081;
+  --success: #2e7d32;
+  --success-soft: #e8f5e9;
+  --warning: #f9a825;
+  --warning-dark: #8a6100;
+  --warning-soft: #fff8e1;
+  --danger: #d32f2f;
+  --danger-soft: #ffebee;
+
+  --page-bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(31, 41, 55, 0.06);
+  --shadow-hover: 0 8px 24px rgba(31, 41, 55, 0.12);
+}
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background: var(--page-bg);
+}
+
+/* Reusable white card that stands out on the grey background */
+.app-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Make Bootstrap cards match the theme */
+.card {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Bootstrap colour classes follow the theme */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+
+  &:hover, &:focus {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+}
+
+.text-primary { color: var(--primary) !important; }
+
+.list-group-item.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Icons inside Material buttons line up with the text */
+.mat-raised-button .mat-icon,
+.mat-stroked-button .mat-icon {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* Fade-in when switching pages: every routed page is inserted right after its <router-outlet> */
+router-outlet + * {
+  display: block;
+  animation: page-fade-in 0.3s ease-out;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  router-outlet + * { animation: none; }
+}
