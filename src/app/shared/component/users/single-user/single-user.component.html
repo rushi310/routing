@@ -1,1 +1,52 @@
-<p>single-user works!</p>
+<div class="row">
+    <div class="col-md-4">
+        <mat-card class="mb-4">
+            <img mat-card-image [src]="">
+            <h4 class="font-weight-bold">
+            {{userDetails.userName}} <small>{{userDetails.userRole}}</small>
+            </h4>
+            <p></p>
+            <mat-card-actions class="d-flex justify-content-between">
+                <button routerLink="" mat-raised-button color="primary">Edit</button>
+                <button (click)="onRemove()" mat-raised-button color="warn">Remove</button>
+
+            </mat-card-actions>
+        </mat-card>
+        <div class="col-md-8">
+            <mat-card class="mb-4">
+                <h4 class="font-weight-bold">Basic Information</h4>
+                <p class="m-0">User id:</p>
+                <p class="m-0">Experience</p>
+                <p class="m-0">Is Active
+                    <span></span>
+                </p>
+            </mat-card>
+            <mat-card class="mb-4">
+                <h4 class="font-weight-bold">Skills</h4>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let skill of userDetails.skills">
+                        {{skill}}
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-card>
+            <mat-card>
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <h4 class="font-weight-bold">Current Address</h4>
+                            <p class="m-0">Country</p>
+                            <p class="m-0">State</p>
+                            <p class="m-0">City</p>
+                            <p class="m-0">Zipcode</p>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <h4 class="font-weight-bold">Permanent Address</h4>
+                            <p class="m-0">Country</p>
+                            <p class="m-0">State</p>
+                            <p class="m-0">City</p>
+                            <p class="m-0">Zipcode</p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

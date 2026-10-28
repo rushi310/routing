@@ -1,1 +1,126 @@
-<p>form-user works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="userForm" (ngSubmit)="onAddUser()">
+                    <h2>{{isInEditMode? 'Update User': 'Add User'}}</h2>
+                    <div class="form-group">
+                        <label for="userName">User Name</label>
+                        <input type="text" id="userName" formControlName="userName" class="form-control" placeholder="Enter user name">
+                        <strong class="text-danger">User Name is required...!</strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole">User Role</label>
+                        <select name="userRole" id="userRole" formControlName="userRole" class="form-control">
+                            <option value="Candidate">Candidate</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Profile Image</label>
+                        <input type="text" id="profileImage" formControlName="profileImage" class="form-control" placeholder="Enter profile url">
+                        <strong class="text-danger">Profile url is necessary...!</strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="experienceYears">Experience Years</label>
+                        <select name="experienceYears" id="experienceYears" formControlName="experienceYears" class="form-control">
+                            <option value="0 to 2 years">0 to 2 years</option>
+                            <option value="2 to 4 years">2 to 4 years</option>
+                            <option value="4 to 6 years">4 to 6 years</option>
+                            <option value="6 to 8 years">6 to 8 years</option>
+                            <option value="8 to 10 years">8 to 10 years</option>
+                            <option value="10+ years">10+years</option>
+                        </select>
+                        <strong>Select your working experience...!</strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileDescription">Profile Description</label>
+                        <textarea name="profileDescription" id="profileDescription" formControlName="profileDescription" class="form-control">
+                            <strong>Profile description is necessary field...!</strong>
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="isActive">Is Active</label>
+                        <select name="isActive" id="isActive" formControlName="isActive" class="form-control">
+                            <option [ngValue]="true">Candidate</option>
+                            <option [ngValue]="false">Admin</option>
+                        </select>
+                    </div>
+                    <div class="row mb-3 formGroupName">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body formGroupName">
+                                    <p class="alert alert-success">Current Address</p>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" id="city" class="form-control" formControlName="city">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" id="state" class="form-control" formControlName="state">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text" id="country" class="form-control" formControlName="country">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pinCode">Pin Code</label>
+                                        <input type="text" id="pinCode" class="form-control" formControlName="pinCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body formGroupName">
+                                    <p class="alert alert-info">Permanent Address</p>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" id="city" class="form-control" formControlName="city">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" id="state" class="form-control" formControlName="state">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text" id="country" class="form-control" formControlName="country">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pinCode">Pin Code</label>
+                                        <input type="text" id="pinCode" class="form-control" formControlName="pinCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="isAddSame" formControlName="isAddSame">
+                        <label for="isAddSame">Current address and permanent address same</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <button mat-raised-button color="primary" type="button">Add Skill</button>
+                        </div>
+                    </div>
+                    <label>Skills*</label>
+                    <div formArrayName="skills">
+                        <div class="row mb-2">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <button mat-raised-button type="button" color="warn">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #skillLimitExid>
+                        <p class="alert alert-danger">No more Skills can be added!!</p>
+                    </ng-template>
+                    <button class="w-100" mat-raised-button color="primary" type="submit">Add User</button>
+                    <button class="w-100" mat-raised-button color="accent" type="submit">Update User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

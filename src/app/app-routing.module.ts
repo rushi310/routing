@@ -6,6 +6,8 @@ import { ProductsComponent } from "./shared/component/products/products.componen
 import { FairsComponent } from "./shared/component/fairs/fairs.component";
 import { SingleProductComponent } from "./shared/component/products/single-product/single-product.component";
 import { ProductFormComponent } from "./shared/component/products/product-form/product-form.component";
+import { FormUserComponent } from "./shared/component/users/form-user/form-user.component";
+import { SingleUserComponent } from "./shared/component/users/single-user/single-user.component";
 
 const routes: Routes = [
     {
@@ -15,6 +17,18 @@ const routes: Routes = [
     {
         path:"users",
         component: UsersComponent,
+    },
+    {
+        path:"users/add",
+        component:FormUserComponent
+    },
+    {
+        path:"users/:id",
+        component:SingleUserComponent
+    },
+    {
+        path:"users/:id/edit",
+        component:FormUserComponent
     },
     {
         path:"products",
